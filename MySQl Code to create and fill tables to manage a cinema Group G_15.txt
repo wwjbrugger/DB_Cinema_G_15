@@ -1,0 +1,174 @@
+-- MySQl Code for manage a cinema.
+
+/*use cinema;*/
+DROP TABLE IF EXISTS Advertisement;
+Create table Advertisement(
+ adID int,
+ brandName varchar(20),
+ duration int,
+ primary key (adID)
+);
+
+
+DROP TABLE IF EXISTS Genre;
+create table Genre(
+ genreID int,
+ genreName varchar(20),
+ primary key (genreID)
+);
+
+DROP TABLE IF EXISTS Director;
+create table Director(
+ directorID int,
+ lastName varchar(20),
+ firstName varchar(20),
+ primary key (directorID)
+);
+
+DROP TABLE IF EXISTS Actor;
+create table Actor(
+ actorID int,
+ lastName varchar(20),
+ firstName varchar(20),
+ primary key (actorID)
+);
+
+DROP TABLE IF EXISTS Movie;
+Create table Movie(
+ movieID int,
+ title varchar(50) NOT NULL,
+ ageNeeded int NOT NULL,
+ duration int,
+ primary key(movieID)
+
+);
+
+DROP TABLE IF EXISTS MovieGenre;
+create table MovieGenre(
+ genreID int,
+ movieID int,
+ primary key (genreID, movieID),
+ FOREIGN KEY (movieID) references Movie(movieID),
+ FOREIGN KEY (genreID) references Genre(genreID)
+);
+DROP TABLE IF EXISTS MovieAdvertisement;
+create table MovieAdvertisement(
+ advertisementID int,
+ movieID int,
+ primary key (AdvertisementID, movieID),
+ FOREIGN KEY (advertisementID) references Advertisement(adID),
+ FOREIGN KEY (movieID) references Movie(movieID)
+);
+
+DROP TABLE IF EXISTS MovieDirectoe;
+create table MovieDirector(
+ directorID int,
+ movieID int,
+ primary key (directorID, movieID),
+ FOREIGN KEY (directorID) references Director(directorID),
+ FOREIGN KEY (movieID) references Movie(movieID)
+);
+
+DROP TABLE IF EXISTS MovieActor;
+create table MovieActor(
+ actorID int,
+ movieID int,
+ primary key (actorID, movieID),
+ FOREIGN KEY (actorID) references Actor(actorID),
+ FOREIGN KEY (movieID) references Movie(movieID)
+);
+
+DROP TABLE IF EXISTS Room;
+Create table Room(
+ roomID int,
+ capacity int NOT NULL,
+ primary key (roomID)
+);
+
+DROP TABLE IF EXISTS ProjectionType;
+create table ProjectionType(
+ projectionTypeID int,
+ projectionTypeName varchar(10),
+ price int,
+ primary key (projectionTypeID)
+);
+
+DROP TABLE IF EXISTS Screening;
+Create table Screening(
+ screeningID int,
+ movieID int,
+ roomID int,
+ begin date,
+ end date,
+ projectionTypeID int,
+ weekDay varchar(10),
+ primary key (screeningID, MovieID, RoomID, begin, end),
+ foreign key (movieID) references Movie(movieID),
+ foreign key (roomID) references Room(roomID),
+ foreign key (projectionTypeID) references ProjectionType(projectionTypeID)
+);
+
+DROP TABLE IF EXISTS Food;
+Create Table Food(
+ foodID int CHECK (foodID in (1, 2, 3, 4, 5)),
+ foodName varchar(20) ,
+ typeFood varchar(10) CHECK (typeFood IN ('drink', 'eat', 'mix')),
+ price int,
+ primary key (foodID)
+);
+
+DROP TABLE IF EXISTS LoyaltyProgram;
+Create table LoyaltyProgram(
+loyaltyProgramID int,
+discount int,
+firstName varchar(15),
+lastName varchar(25),
+email varchar(25),
+primary key (loyaltyProgramID)
+);
+
+DROP TABLE IF EXISTS Customer;
+Create Table Customer(
+ customerID int,
+ foodID int ,
+ screeningID int,
+ age int NOT NULL,
+ loyaltyProgramID int,
+ primary key (customerID),
+ foreign key (foodID) references Food(foodID),
+ foreign key (screeningID) references Screening(screeningID),
+foreign key (loyaltyProgramID) references LoyaltyProgram(loyaltyProgramID)
+);
+
+DROP TABLE IF EXISTS RoomSeat;
+create table RoomSeat(
+ seatID int,
+ roomID int,
+ available bool,
+ primary key (seatID, roomID),
+ FOREIGN KEY (roomID) references Room(roomID)
+);
+
+DROP TABLE IF EXISTS CustomerSeat;
+create table CustomerSeat(
+ customerID int,
+ seatID int,
+ roomID int,
+ primary key (customerID, roomID, seatID),
+ FOREIGN KEY (customerID) references Customer(customerID),
+ FOREIGN KEY (roomID) references Room(roomID),
+ FOREIGN KEY (seatID, roomID) references RoomSeat(seatID, roomID)
+);
+
+/*
+insert into Food
+values (1,'Coca','Drink',3000),
+(2,'Sprite','Drink',3000),
+(3,'Popcorn','Eat',5000),
+(4,'Popocorn + Cola','Mix',7000),
+(5,'Candies','Eat',4000)
+;
+select * from Food;
+*/
+
+

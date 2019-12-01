@@ -1,0 +1,40 @@
+ MySQl Request  for manage a cinema Group G_15
+
+
+/*AddMovie: Add a Movie to our Database in the form MovieID, Title, Age, Duration [min] */  
+
+insert into Movie 
+values (149407,’ 'Bohemian Rhapsody’,12,130); 
+
+
+/*DeleteMovie: Delete a Movie from the Database*/
+/*AddAdvertisement : Add Advertisement to our Database in the form AddID, BrandName, Duration[min] */
+/*DeleteAdvertisement: Delete an Advertisement from the Database*/
+/*SearchAdvertisement : 
+/*AddGenre : Add a Genre to our Database in the form GenreID, GenreName*/
+/*SearchByGenre : Search Movies by 
+AddDirector
+SearchByDirector
+AddActor
+SearchByActor
+SearchByMovieName
+SearchByAgeNeeded
+SearchByDuration
+FindMovieRoom
+CheckRoomCapacity
+FIndByProjectionType
+FindByPrice
+SearchByBeginDate
+SearchFoodPrice
+SearchFoodByType
+AddLoyaltyProgram
+DeleteLoyaltyProgram
+SearchLoyaltyProgram
+ModifyLoytaltyProgram
+AddCustomer
+CheckAvailableSeat
+CheckCustomerSeat
+
+
+
+
